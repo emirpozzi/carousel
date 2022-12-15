@@ -1,0 +1,181 @@
+.card {
+  max-width: 300px;
+  flex-basis: 45%;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+/* make images not draggable */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* In order to use mobile or desktop component depending on screen width*/
+#mobile-element {
+  display: none;
+}
+
+#desktop-element {
+  display: flex;
+  scroll-behavior: smooth;
+}
+
+.scrollbar {
+  display: none;
+  gap: 9px;
+  animation: 0.3s ease-out 0s 1 fadeIn;
+  padding-left: 200px;
+}
+
+@media (max-width: 600px) {
+  .scrollbar {
+    display: flex;
+  }
+
+  #mobile-element {
+    display: flex;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    width: 600px;
+
+    /* Avoid scrollbar */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    /* Make test not selectable to avoid selecting texting while swiping in mobile */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .mobile-element::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    width: 600px;
+  }
+
+  .buttons {
+    visibility: hidden;
+  }
+
+  #desktop-element {
+    display: none;
+  }
+}
+
+/* ANIMATIONS */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-15%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.title {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.ml {
+  margin-left: 0.5rem;
+}
+
+.body-type {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: grey;
+}
+
+.links-container {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  text-transform: uppercase;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  color: #043266;
+  cursor: pointer;
+  gap: 30px;
+}
+
+.links {
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  width: 70px;
+  color: #206dbb;
+}
+
+.links:hover,
+.links:focus,
+.links:active,
+.arrow-svg:hover {
+  color: #5786c2;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+  margin-top: 10px;
+}
+
+.button {
+  margin-left: 10px;
+}
+
+.rotate-left {
+  transform: rotate(180deg);
+}
+
+.button:hover,
+.button:focus,
+.button:active,
+.rotate-left:hover {
+  opacity: 30%;
+}
+
+.arrow-svg {
+  position: relative;
+  left: 10px;
+  bottom: -2px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #ebebeb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.selected-dot {
+  height: 10px;
+  width: 10px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+  animation: 0.3s ease-out 0s 1 fadeIn;
+}
