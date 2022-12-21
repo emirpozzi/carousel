@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchArticles } from "src/api/fetch-articles";
 import { Article } from "src/types/article";
 import ArrowButton from "src/components/core/ArrowButton";
 import Scrollbar from "src/components/core/Scrollbar";
-import { WIDTH_CARD, VISIBLE_ITEMS } from "src/lib/articles-constants";
+import {
+  WIDTH_CARD,
+  VISIBLE_ITEMS,
+  NUMBER_ARTICLES,
+} from "src/lib/articles-constants";
 import { isMovementInvalid } from "src/lib/carousel";
 import ArticleList from "./ArticleList";
 
-/** Number of images in assets */
-const NUMBER_ARTICLES = 8;
+// TODO remove debounce package
 
 const ArticleCarousel = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -16,7 +19,8 @@ const ArticleCarousel = () => {
   const [index, setIndex] = useState(0);
   const [scrollStart, setScrollStart] = useState(0);
   const [scrollEnd, setScrollEnd] = useState(0);
-  const [offsetX, setOffsetX] = useState(WIDTH_CARD);
+
+  const carouselRel = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     fetchArticles().then((articles: Article[]) => {
@@ -26,22 +30,15 @@ const ArticleCarousel = () => {
   }, []);
 
   useEffect(() => {
-    setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
-  }, [index, articles]);
+    const movement = Math.sign(scrollEnd - scrollStart);
+    if (isMovementInvalid(movement, scrollStart - scrollEnd)) return;
+    if (carouselRel.current)
+      carouselRel.current.scrollLeft -= movement * WIDTH_CARD;
+  }, [scrollStart, scrollEnd]);
 
   useEffect(() => {
-    const carousel = document.getElementById("mobile-element");
-    if (carousel) {
-      carousel.onclick = () => {
-        const movementDirection = Math.sign(scrollEnd - scrollStart);
-        if (isMovementInvalid(movementDirection, offsetX)) return;
-
-        carousel.scrollLeft += WIDTH_CARD * movementDirection;
-
-        setOffsetX((offsetX) => offsetX + WIDTH_CARD * movementDirection);
-      };
-    }
-  }, [offsetX, scrollEnd, scrollStart]);
+    setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
+  }, [articles, index]);
 
   const handleRightClick = () => {
     if (index === VISIBLE_ITEMS) return;
@@ -53,12 +50,28 @@ const ArticleCarousel = () => {
     setIndex((index) => index - 1);
   };
 
+  const handleTouchStart = (e: any) => {
+    setScrollStart(e.touches[0]?.clientX);
+  };
+
+  const handleTouchEnd = (e: any) => {
+    setScrollEnd(e.touches[0]?.clientX);
+  };
+
+  // TODO mobile and desktop put them in 2 different components?
   return (
     <>
       <ul
         id="mobile-element"
-        onMouseDown={(e) => setScrollEnd(e.clientX)}
-        onMouseUp={(e) => setScrollStart(e.clientX)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={(e) => {
+          setScrollStart(e.clientX);
+        }}
+        onMouseUp={(e) => {
+          setScrollEnd(e.clientX);
+        }}
+        ref={carouselRel}
       >
         <ArticleList articles={articles} />
       </ul>
@@ -80,10 +93,7 @@ const ArticleCarousel = () => {
         />
       </div>
 
-      <Scrollbar
-        numberOfPoints={NUMBER_ARTICLES}
-        selectedPoint={offsetX / WIDTH_CARD - 1}
-      />
+      <Scrollbar numberOfPoints={NUMBER_ARTICLES} selectedPoint={1} />
     </>
   );
 };
