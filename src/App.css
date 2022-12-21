@@ -39,12 +39,13 @@
 /* make images not draggable */
 img {
   user-select: none;
-  user-drag: none;
-  -webkit-user-drag: none;
   user-select: none;
   -moz-user-select: none;
+  -moz-user-drag: none;
+  -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  -ms-user-drag: none;
 }
 
 /* In order to use mobile or desktop component depending on screen width*/
@@ -187,15 +188,13 @@ img {
   margin-left: 10px;
 }
 
-.rotate-left {
-  transform: rotate(180deg);
+button:disabled,
+button[disabled] {
+  opacity: 30%;
 }
 
-.button:hover,
-.button:focus,
-.button:active,
-.rotate-left:hover {
-  opacity: 30%;
+.rotate-left {
+  transform: rotate(180deg);
 }
 
 .arrow-svg {

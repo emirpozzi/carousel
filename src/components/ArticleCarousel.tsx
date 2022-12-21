@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchArticles } from "src/api/fetch-articles";
 import { Article } from "src/types/article";
 import ArrowButton from "src/components/core/ArrowButton";
@@ -13,18 +13,10 @@ const NUMBER_ARTICLES = 8;
 const ArticleCarousel = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [shownArticles, setShownArticles] = useState<Article[]>([]);
+  const [index, setIndex] = useState(0);
   const [scrollStart, setScrollStart] = useState(0);
   const [scrollEnd, setScrollEnd] = useState(0);
   const [offsetX, setOffsetX] = useState(WIDTH_CARD);
-
-  const FIRST_BATCH = useMemo(
-    () => articles.slice(0, VISIBLE_ITEMS),
-    [articles]
-  );
-  const SECOND_BATCH = useMemo(
-    () => articles.slice(VISIBLE_ITEMS, NUMBER_ARTICLES),
-    [articles]
-  );
 
   useEffect(() => {
     fetchArticles().then((articles: Article[]) => {
@@ -32,6 +24,10 @@ const ArticleCarousel = () => {
       setShownArticles(articles.slice(0, VISIBLE_ITEMS));
     });
   }, []);
+
+  useEffect(() => {
+    setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
+  }, [index, articles]);
 
   useEffect(() => {
     const carousel = document.getElementById("mobile-element");
@@ -46,6 +42,16 @@ const ArticleCarousel = () => {
       };
     }
   }, [offsetX, scrollEnd, scrollStart]);
+
+  const handleRightClick = () => {
+    if (index === VISIBLE_ITEMS) return;
+    setIndex((index) => index + 1);
+  };
+
+  const handleLeftClick = () => {
+    if (index === 0) return;
+    setIndex((index) => index - 1);
+  };
 
   return (
     <>
@@ -64,11 +70,13 @@ const ArticleCarousel = () => {
       <div className="buttons">
         <ArrowButton
           orientation="left"
-          onClick={() => setShownArticles(FIRST_BATCH)}
+          onClick={handleLeftClick}
+          isDisabled={index === 0}
         />
         <ArrowButton
           orientation="right"
-          onClick={() => setShownArticles(SECOND_BATCH)}
+          onClick={handleRightClick}
+          isDisabled={index === VISIBLE_ITEMS}
         />
       </div>
 
