@@ -12,7 +12,9 @@ const ArticleItem = ({ article }: Props) => {
   return (
     <div className="card">
       <ArticleHeader article={article} />
-      <StaticImage url={article.imageUrl} alt={article.modelName} />
+      <div className="img-wrapper ">
+        <StaticImage url={article.imageUrl} alt={article.modelName} />
+      </div>
       <p className="links-container">
         <ArrowLink tag="LEARN" link={"/learn/" + article.id} />
         <ArrowLink tag="SHOP" link={"/shop/" + article.id} />
