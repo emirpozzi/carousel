@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".", // to have imoprts with absolute paths
+    "baseUrl": ".", // to have imports with absolute paths
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
