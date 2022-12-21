@@ -10,7 +10,7 @@ const ArrowButton = ({ orientation, onClick }: Props) => {
     <button>
       <img
         className={`${orientation === "left" ? "rotate-left" : "button"}`}
-        src={require("src/assets/svg/chevron-circled.svg")}
+        src={"/assets/svg/chevron-circled.svg"}
         onClick={() => (onClick ? onClick() : null)}
         alt="circled arrow button"
         width="40px"

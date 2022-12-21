@@ -10,7 +10,7 @@ type Props = {
  * @example /image.png
  */
 const StaticImage = ({ url, alt, width = "300px" }: Props) => {
-  return <img src={require(`src/assets${url}`)} alt={alt} width={width} />;
+  return <img src={`/assets${url}`} alt={alt} width={width} />;
 };
 
 export default StaticImage;
