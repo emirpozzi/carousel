@@ -6,6 +6,7 @@ How to start:
 Notes:
 
 1. Most tested on Chrome and Firefox, the carousel has some issues on Safari
+2. Scrolling left and right in the carousel is meant to be used by clicking, moving right or left and releasing
 
 ### Desktop
 
