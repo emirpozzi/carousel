@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NUMBER_ARTICLES, WIDTH_CARD } from "src/lib/articles-constants";
 import { isMovementInvalid } from "src/lib/carousel";
 import { Article } from "src/types/article";
-import ArticleList from "./List";
+import List from "./List";
 import Scrollbar from "../core/Scrollbar";
 import "./Carousel.css";
 
@@ -10,7 +10,7 @@ type Props = {
   articles: Article[];
 };
 
-const MobileCarousel = ({ articles }: Props) => {
+const Carousel = ({ articles }: Props) => {
   const [scrollStart, setScrollStart] = useState(0);
   const [offset, setOffset] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -40,7 +40,7 @@ const MobileCarousel = ({ articles }: Props) => {
         }}
         ref={carouselRel}
       >
-        <ArticleList articles={articles} />
+        <List articles={articles} />
       </ul>
       <Scrollbar
         numberOfPoints={NUMBER_ARTICLES}
@@ -50,4 +50,4 @@ const MobileCarousel = ({ articles }: Props) => {
   );
 };
 
-export default MobileCarousel;
+export default Carousel;

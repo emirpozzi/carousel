@@ -1,11 +1,12 @@
 import React from "react";
 import { Article } from "src/types/article";
+import "./Header.css";
 
 type Props = {
   article: Article;
 };
 
-const ArticleHeader = ({ article }: Props) => {
+const Header = ({ article }: Props) => {
   return (
     <header>
       <div className="body-type">{article.bodyType}</div>
@@ -17,4 +18,4 @@ const ArticleHeader = ({ article }: Props) => {
   );
 };
 
-export default ArticleHeader;
+export default Header;

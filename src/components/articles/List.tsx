@@ -1,21 +1,21 @@
 import React from "react";
 import { Article } from "src/types/article";
-import ArticleItem from "./Item";
+import Item from "./Item";
 
 type Props = {
   articles: Article[];
 };
 
-const ArticleList = ({ articles }: Props) => {
+const List = ({ articles }: Props) => {
   return (
     <>
       {articles.map((item: Article) => (
         <li key={item.id}>
-          <ArticleItem article={item} />
+          <Item article={item} />
         </li>
       ))}
     </>
   );
 };
 
-export default ArticleList;
+export default List;

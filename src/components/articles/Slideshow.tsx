@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { VISIBLE_ITEMS } from "src/lib/articles-constants";
 import { Article } from "src/types/article";
 import ArrowButton from "../core/ArrowButton";
-import ArticleList from "./List";
+import List from "./List";
 import "./Slideshow.css";
 
 type Props = {
   articles: Article[];
 };
 
-const ArticleSlideshow = ({ articles }: Props) => {
+const Slideshow = ({ articles }: Props) => {
   const [shownArticles, setShownArticles] = useState<Article[]>([]);
   const [index, setIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -53,7 +53,7 @@ const ArticleSlideshow = ({ articles }: Props) => {
       </form>
 
       <ul id="desktop-element">
-        <ArticleList articles={shownArticles} />
+        <List articles={shownArticles} />
       </ul>
 
       {!searchTerm && (
@@ -78,4 +78,4 @@ const ArticleSlideshow = ({ articles }: Props) => {
   );
 };
 
-export default ArticleSlideshow;
+export default Slideshow;

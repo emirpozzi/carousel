@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleHeader from "./Header";
+import Header from "./Header";
 import StaticImage from "src/components/core/StaticImage";
 import ArrowLink from "../core/ArrowLink";
 import { Article } from "../../types/article";
@@ -9,10 +9,10 @@ type Props = {
   article: Article;
 };
 
-const ArticleItem = ({ article }: Props) => {
+const Item = ({ article }: Props) => {
   return (
     <div className="card">
-      <ArticleHeader article={article} />
+      <Header article={article} />
       <div className="img-wrapper">
         <StaticImage url={article.imageUrl} alt={article.modelName} />
       </div>
@@ -24,4 +24,4 @@ const ArticleItem = ({ article }: Props) => {
   );
 };
 
-export default ArticleItem;
+export default Item;

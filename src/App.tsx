@@ -1,11 +1,11 @@
 import React from "react";
 import "src/App.css";
-import ArticleCarousel from "src/components/articles/Container";
+import Container from "src/components/articles/Container";
 
 function App() {
   return (
     <section>
-      <ArticleCarousel />
+      <Container />
     </section>
   );
 }

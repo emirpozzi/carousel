@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { fetchArticles } from "src/api/fetch-articles";
 import { Article } from "src/types/article";
-import ArticleSlideshow from "./Slideshow";
-import MobileCarousel from "./Carousel";
+import Slideshow from "./Slideshow";
+import Carousel from "./Carousel";
 
-const ArticleCarousel = () => {
+const Container = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
@@ -15,10 +15,10 @@ const ArticleCarousel = () => {
 
   return (
     <>
-      <MobileCarousel articles={articles} />
-      <ArticleSlideshow articles={articles} />
+      <Carousel articles={articles} />
+      <Slideshow articles={articles} />
     </>
   );
 };
 
-export default ArticleCarousel;
+export default Container;
