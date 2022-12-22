@@ -18,25 +18,25 @@ const Slideshow = ({ articles }: Props) => {
     setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
   }, [articles, index]);
 
-  const handleRightClick = () => {
+  const handleRightClick = (): void => {
     if (index === VISIBLE_ITEMS) return;
     setIndex((index) => index + 1);
   };
 
-  const handleLeftClick = () => {
+  const handleLeftClick = (): void => {
     if (index === 0) return;
     setIndex((index) => index - 1);
   };
 
-  const handleInputChange = (e: any) => {
-    setSearchTerm(e.target.value);
-    if (e.target.value === "") {
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchTerm(e.currentTarget.value);
+    if (e.currentTarget.value === "") {
       setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
       return;
     }
     setShownArticles(
       articles.filter((article: Article) =>
-        article.bodyType.startsWith(e.target.value)
+        article.bodyType.startsWith(e.currentTarget.value)
       )
     );
   };
