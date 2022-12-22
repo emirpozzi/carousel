@@ -18,27 +18,37 @@ const ArticleCarousel = () => {
   const [shownArticles, setShownArticles] = useState<Article[]>([]);
   const [index, setIndex] = useState(0);
   const [scrollStart, setScrollStart] = useState(0);
-  const [scrollEnd, setScrollEnd] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const carouselRel = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     fetchArticles().then((articles: Article[]) => {
       setArticles(articles);
-      setShownArticles(articles.slice(0, VISIBLE_ITEMS));
     });
   }, []);
 
   useEffect(() => {
-    const movement = Math.sign(scrollEnd - scrollStart);
-    if (isMovementInvalid(movement, scrollStart - scrollEnd)) return;
-    if (carouselRel.current)
-      carouselRel.current.scrollLeft -= movement * WIDTH_CARD;
-  }, [scrollStart, scrollEnd]);
-
-  useEffect(() => {
     setShownArticles(articles.slice(index, VISIBLE_ITEMS + index));
   }, [articles, index]);
+
+  useEffect(() => {
+    const movement = Math.sign(offset);
+    console.log("movement", movement);
+
+    if (isMovementInvalid(movement, scrollPosition)) {
+      console.log("ITS INVALID");
+      return;
+    }
+    // add state for an index for the mobile version
+    if (carouselRel.current) {
+      carouselRel.current.scrollLeft += movement * WIDTH_CARD;
+      console.log("before setting", scrollPosition);
+      setScrollPosition((position) => position + movement);
+      console.log("posafter setting", scrollPosition);
+    }
+  }, [offset]);
 
   const handleRightClick = () => {
     if (index === VISIBLE_ITEMS) return;
@@ -50,26 +60,16 @@ const ArticleCarousel = () => {
     setIndex((index) => index - 1);
   };
 
-  const handleTouchStart = (e: any) => {
-    setScrollStart(e.touches[0]?.clientX);
-  };
-
-  const handleTouchEnd = (e: any) => {
-    setScrollEnd(e.touches[0]?.clientX);
-  };
-
   // TODO mobile and desktop put them in 2 different components?
   return (
     <>
       <ul
         id="mobile-element"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
         onMouseDown={(e) => {
           setScrollStart(e.clientX);
         }}
         onMouseUp={(e) => {
-          setScrollEnd(e.clientX);
+          setOffset(scrollStart - e.clientX);
         }}
         ref={carouselRel}
       >
@@ -93,7 +93,10 @@ const ArticleCarousel = () => {
         />
       </div>
 
-      <Scrollbar numberOfPoints={NUMBER_ARTICLES} selectedPoint={1} />
+      <Scrollbar
+        numberOfPoints={NUMBER_ARTICLES}
+        selectedPoint={scrollPosition}
+      />
     </>
   );
 };

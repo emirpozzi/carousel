@@ -5,10 +5,10 @@ import { TOTAL_WIDTH, WIDTH_CARD } from "./articles-constants";
  * or swiping right in the last one */
 export const isMovementInvalid = (
   movement: number,
-  offset: number
+  scrollPosition: number
 ): boolean => {
   return (
-    (movement < 0 && offset === WIDTH_CARD) ||
-    (movement > 0 && offset === TOTAL_WIDTH)
+    (movement < 0 && scrollPosition === 0) ||
+    (movement > 0 && scrollPosition === 7)
   );
 };
