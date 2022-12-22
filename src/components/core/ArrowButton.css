@@ -1,0 +1,12 @@
+.button {
+  margin-left: 10px;
+}
+
+button:disabled,
+button[disabled] {
+  opacity: 30%;
+}
+
+.rotate-left {
+  transform: rotate(180deg);
+}

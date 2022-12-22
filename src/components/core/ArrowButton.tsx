@@ -1,4 +1,5 @@
 import React from "react";
+import "./ArrowButton.css";
 
 type Props = {
   orientation: "left" | "right";

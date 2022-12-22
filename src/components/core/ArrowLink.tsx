@@ -1,5 +1,6 @@
 import React from "react";
 import StaticImage from "src/components/core/StaticImage";
+import "./ArrowLink.css";
 
 type Props = {
   tag: string;

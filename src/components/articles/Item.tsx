@@ -3,6 +3,7 @@ import ArticleHeader from "./Header";
 import StaticImage from "src/components/core/StaticImage";
 import ArrowLink from "../core/ArrowLink";
 import { Article } from "../../types/article";
+import "./Item.css";
 
 type Props = {
   article: Article;
@@ -12,7 +13,7 @@ const ArticleItem = ({ article }: Props) => {
   return (
     <div className="card">
       <ArticleHeader article={article} />
-      <div className="img-wrapper ">
+      <div className="img-wrapper">
         <StaticImage url={article.imageUrl} alt={article.modelName} />
       </div>
       <p className="links-container">

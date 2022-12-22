@@ -1,4 +1,5 @@
 import React from "react";
+import "./Scrollbar.css";
 
 type Props = {
   numberOfPoints: number;
@@ -7,15 +8,13 @@ type Props = {
 
 const Scrollbar = ({ numberOfPoints, selectedPoint }: Props) => {
   return (
-    <div className="flex-container">
-      <div className="scrollbar">
-        {[...Array(numberOfPoints)].map((_e: number, i: number) => (
-          <span
-            className={`${i === selectedPoint ? "selected-dot" : "dot"}`}
-            key={i}
-          ></span>
-        ))}
-      </div>
+    <div className="scrollbar">
+      {[...Array(numberOfPoints)].map((_e: number, i: number) => (
+        <span
+          className={`${i === selectedPoint ? "selected-dot" : "dot"}`}
+          key={i}
+        ></span>
+      ))}
     </div>
   );
 };

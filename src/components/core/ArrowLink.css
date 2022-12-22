@@ -1,0 +1,20 @@
+.links {
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  width: 70px;
+  color: #206dbb;
+}
+
+.links:hover,
+.links:focus,
+.links:active,
+.arrow-svg:hover {
+  color: #5786c2;
+}
+
+.arrow-svg {
+  position: relative;
+  left: 10px;
+  bottom: -2px;
+}
