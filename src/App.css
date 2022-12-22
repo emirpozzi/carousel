@@ -39,7 +39,6 @@
 /* make images not draggable */
 img {
   user-select: none;
-  user-select: none;
   -moz-user-select: none;
   -moz-user-drag: none;
   -webkit-user-drag: none;
