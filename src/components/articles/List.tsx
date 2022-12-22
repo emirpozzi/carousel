@@ -1,6 +1,6 @@
 import React from "react";
 import { Article } from "src/types/article";
-import ArticleItem from "src/components/ArticleItem";
+import ArticleItem from "./Item";
 
 type Props = {
   articles: Article[];

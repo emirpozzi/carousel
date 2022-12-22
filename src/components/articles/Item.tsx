@@ -1,8 +1,8 @@
 import React from "react";
-import { Article } from "src/types/article";
-import ArticleHeader from "src/components/ArticleHeader";
+import ArticleHeader from "./Header";
 import StaticImage from "src/components/core/StaticImage";
-import ArrowLink from "./core/ArrowLink";
+import ArrowLink from "../core/ArrowLink";
+import { Article } from "../../types/article";
 
 type Props = {
   article: Article;
