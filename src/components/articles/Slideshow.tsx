@@ -3,6 +3,7 @@ import { VISIBLE_ITEMS } from "src/lib/articles-constants";
 import { Article } from "src/types/article";
 import ArrowButton from "../core/ArrowButton";
 import ArticleList from "./List";
+import "./Slideshow.css";
 
 type Props = {
   articles: Article[];

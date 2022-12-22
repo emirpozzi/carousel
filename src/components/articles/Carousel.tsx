@@ -4,6 +4,7 @@ import { isMovementInvalid } from "src/lib/carousel";
 import { Article } from "src/types/article";
 import ArticleList from "./List";
 import Scrollbar from "../core/Scrollbar";
+import "./Carousel.css";
 
 type Props = {
   articles: Article[];

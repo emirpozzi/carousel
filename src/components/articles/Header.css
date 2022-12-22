@@ -1,0 +1,14 @@
+.body-type {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: grey;
+}
+
+.ml {
+  margin-left: 0.5rem;
+}
+
+.title {
+  display: flex;
+  margin-bottom: 1rem;
+}
